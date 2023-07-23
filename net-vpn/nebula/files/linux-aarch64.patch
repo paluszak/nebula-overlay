@@ -1,0 +1,23 @@
+--- nebula-1.7.2/Makefile
++++ nebula-1.2.2/Makefile
+@@ -30,19 +30,7 @@
+ 
+ LDFLAGS = -X main.Build=$(BUILD_NUMBER)
+ 
+-ALL_LINUX = linux-amd64 \
+-	linux-386 \
+-	linux-ppc64le \
+-	linux-arm-5 \
+-	linux-arm-6 \
+-	linux-arm-7 \
+-	linux-arm64 \
+-	linux-mips \
+-	linux-mipsle \
+-	linux-mips64 \
+-	linux-mips64le \
+-	linux-mips-softfloat \
+-	linux-riscv64
++ALL_LINUX = linux-arm64
+ 
+ ALL = $(ALL_LINUX) \
+ 	darwin-amd64 \

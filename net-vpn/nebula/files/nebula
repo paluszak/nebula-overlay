@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+command="/usr/bin/nebula"
+command_args="-config /etc/nebula/"
+name="Nebula VPN"
+description="Nebula VPN"
+pidfile=/run/nebula.pid
+command_background=true
+output_log=/var/log/nebula.log
+error_log=/var/log/nebula.err
+
+depend() {
+    need net
+}
