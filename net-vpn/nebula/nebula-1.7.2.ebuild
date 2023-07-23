@@ -3,15 +3,16 @@
 
 EAPI=8
 
-inherit systemd
+inherit systemd go-module
 
 DESCRIPTION="Nebula VPN"
 HOMEPAGE="https://github.com/slackhq/nebula"
 SRC_URI="https://github.com/slackhq/nebula/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" http://moko.publicvm.com:13007/${P}-deps.tar.xz"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64"
-RESTRICT="mirror network-sandbox"
+KEYWORDS="~amd64"
+RESTRICT="mirror"
 PATCHES="${FILESDIR}/nebula-service.patch"
 BDEPEND="dev-lang/go"
 
