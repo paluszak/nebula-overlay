@@ -17,7 +17,7 @@ PATCHES="${FILESDIR}/nebula-service.patch"
 IUSE="nebula-cert"
 
 src_prepare() {
-    PATCHES+="${FILESDIR}/Makefile.patch"
+    PATCHES+=" ${FILESDIR}/Makefile.patch"
     default
 }
 
