@@ -1,0 +1,33 @@
+--- nebula-1.7.2/Makefile
++++ nebula-1.7.2/Makefile
+@@ -2,7 +2,7 @@
+ NEBULA_CMD_PATH = "./cmd/nebula"
+ GO111MODULE = on
+ export GO111MODULE
+-CGO_ENABLED = 0
++CGO_ENABLED = 1
+ export CGO_ENABLED
+ 
+ # Set up OS specific bits
+@@ -29,6 +29,7 @@
+ endif
+ 
+ LDFLAGS = -X main.Build=$(BUILD_NUMBER)
++LDFLAGS += "-s -w"
+ 
+ ALL_LINUX = linux-amd64 \
+ 	linux-386 \
+@@ -96,8 +97,12 @@
+ bin-boringcrypto: build/linux-$(shell go env GOARCH)-boringcrypto/nebula build/linux-$(shell go env GOARCH)-boringcrypto/nebula-cert
+ 	mv $? .
+ 
+-bin:
++bin: bin-nebula bin-nebula-cert
++
++bin-nebula:
+ 	go build $(BUILD_ARGS) -ldflags "$(LDFLAGS)" -o ./nebula${NEBULA_CMD_SUFFIX} ${NEBULA_CMD_PATH}
++
++bin-nebula-cert:
+ 	go build $(BUILD_ARGS) -ldflags "$(LDFLAGS)" -o ./nebula-cert${NEBULA_CMD_SUFFIX} ./cmd/nebula-cert
+ 
+ install:
