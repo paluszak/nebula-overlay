@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 RESTRICT="mirror"
 PATCHES="${FILESDIR}/nebula-service.patch"
-USE="nebula-cert"
+IUSE="nebula-cert"
 
 src_prepare() {
     PATCHES+="${FILESDIR}/Makefile.patch"
