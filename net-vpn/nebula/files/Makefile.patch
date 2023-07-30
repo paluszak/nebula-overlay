@@ -13,7 +13,7 @@
  endif
  
  LDFLAGS = -X main.Build=$(BUILD_NUMBER)
-+LDFLAGS += "-s -w"
++LDFLAGS += -s -w
  
  ALL_LINUX = linux-amd64 \
  	linux-386 \
