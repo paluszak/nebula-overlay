@@ -14,15 +14,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 RESTRICT="mirror"
 PATCHES="${FILESDIR}/nebula-service.patch"
-BDEPEND="dev-lang/go"
+USE="nebula-cert"
 
 src_prepare() {
-    if [[ "${CBUILD}" == *"x86_64"* ]]; then
-        PATCHES+=( "${FILESDIR}"/linux-amd64.patch )
-    fi
-    if [[ "${CBUILD}" == *"aarch64"* ]]; then
-        PATCHES+=( "${FILESDIR}"/linux-aarch64.patch )
-    fi
+    PATCHES+="${FILESDIR}/Makefile.patch"
     default
 }
 
@@ -31,18 +26,18 @@ src_configure() {
 }
 
 src_compile() {
-    make release-linux
+    if use nebula-cert; then
+        make bin
+    else
+        make bin-nebula
+    fi
 }
 
 src_install() {
-    if [[ "${CBUILD}" == *"x86_64"* ]]; then
-        BUILDPATH="linux-amd64"
+    dobin nebula
+    if use nebula-cert; then
+        dobin nebula-cert
     fi
-    if [[ "${CBUILD}" == *"aarch64"* ]]; then
-        BUILDPATH="linux-arm64"
-    fi
-    dobin build/${BUILDPATH}/nebula
-    dobin build/${BUILDPATH}/nebula-cert
     doinitd "${FILESDIR}"/nebula
     systemd_dounit examples/service_scripts/nebula.service
 }
