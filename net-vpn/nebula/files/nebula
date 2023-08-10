@@ -1,12 +1,12 @@
 #!/sbin/openrc-run
-command="/usr/bin/nebula"
-command_args="-config /etc/nebula/"
+command="EPREFIX/usr/bin/nebula"
+command_args="-config EPREFIX/etc/nebula/config.yml"
 name="Nebula VPN"
 description="Nebula VPN"
-pidfile=/run/nebula.pid
+pidfile=EPREFIX/run/nebula.pid
 command_background=true
-output_log=/var/log/nebula.log
-error_log=/var/log/nebula.err
+output_log=EPREFIX/var/log/nebula.log
+error_log=EPREFIX/var/log/nebula.err
 
 depend() {
     need net

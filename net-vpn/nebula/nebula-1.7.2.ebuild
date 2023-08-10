@@ -13,7 +13,6 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 RESTRICT="mirror"
-#PATCHES="${FILESDIR}/nebula-service.patch"
 IUSE="nebula-cert"
 
 src_prepare() {
@@ -21,6 +20,8 @@ src_prepare() {
         -e "s|/usr/local/bin/nebula|${EPREFIX}/usr/bin/nebula|" \
         -e "s|/etc/nebula/config.yml|${EPREFIX}/etc/beula/config.yml|" \
         ${S}/examples/service_scripts/nebula.service || die "Patching systemd service file failed"
+    sed -i \
+        -e "s|EPREFIX|${EPREFIX}|g" || die "Setting EPREFIX in openrc service file failed"
     PATCHES+=" ${FILESDIR}/Makefile.patch"
     default
 }
