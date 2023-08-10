@@ -21,7 +21,7 @@ src_prepare() {
         -e "s|/etc/nebula/config.yml|${EPREFIX}/etc/beula/config.yml|" \
         ${S}/examples/service_scripts/nebula.service || die "Patching systemd service file failed"
     sed -i \
-        -e "s|EPREFIX|${EPREFIX}|g" || die "Setting EPREFIX in openrc service file failed"
+        -e "s|EPREFIX|${EPREFIX}|g" "${FILESDIR}"/nebula > "${T}"/nebula || die "Setting EPREFIX in openrc service file failed"
     PATCHES+=" ${FILESDIR}/Makefile.patch"
     default
 }
@@ -43,6 +43,6 @@ src_install() {
     if use nebula-cert; then
         dobin nebula-cert
     fi
-    doinitd "${FILESDIR}"/nebula
+    doinitd "${T}"/nebula
     systemd_dounit examples/service_scripts/nebula.service
 }
