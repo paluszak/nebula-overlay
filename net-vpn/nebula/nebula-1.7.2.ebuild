@@ -20,7 +20,7 @@ src_prepare() {
         -e "s|/usr/local/bin/nebula|${EPREFIX}/usr/bin/nebula|" \
         -e "s|/etc/nebula/config.yml|${EPREFIX}/etc/beula/config.yml|" \
         ${S}/examples/service_scripts/nebula.service || die "Patching systemd service file failed"
-    sed -i \
+    sed \
         -e "s|EPREFIX|${EPREFIX}|g" "${FILESDIR}"/nebula > "${T}"/nebula || die "Setting EPREFIX in openrc service file failed"
     PATCHES+=" ${FILESDIR}/Makefile.patch"
     default
