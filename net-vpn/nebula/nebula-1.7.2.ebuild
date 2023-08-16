@@ -14,6 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 RESTRICT="mirror"
 IUSE="nebula-cert"
+RDEPEND="acct-user/nebula"
 
 src_prepare() {
     sed -i \

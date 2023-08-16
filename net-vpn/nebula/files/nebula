@@ -1,6 +1,8 @@
 #!/sbin/openrc-run
 command="EPREFIX/usr/bin/nebula"
 command_args="-config EPREFIX/etc/nebula/config.yml"
+command_user="nebula:nebula"
+capabilities="^cap_net_admin"
 name="Nebula VPN"
 description="Nebula VPN"
 pidfile=EPREFIX/run/nebula.pid
