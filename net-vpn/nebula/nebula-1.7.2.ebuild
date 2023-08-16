@@ -19,7 +19,8 @@ RDEPEND="acct-user/nebula"
 src_prepare() {
     sed -i \
         -e "s|/usr/local/bin/nebula|${EPREFIX}/usr/bin/nebula|" \
-        -e "s|/etc/nebula/config.yml|${EPREFIX}/etc/beula/config.yml|" \
+        -e "s|/etc/nebula/config.yml|${EPREFIX}/etc/nebula/config.yml|" \
+        -e '/^SyslogIdentifier*/a User=nebula\nGroup=nebula\nAmbientCapabilities=CAP_NET_ADMIN' \
         ${S}/examples/service_scripts/nebula.service || die "Patching systemd service file failed"
     sed \
         -e "s|EPREFIX|${EPREFIX}|g" "${FILESDIR}"/nebula > "${T}"/nebula || die "Setting EPREFIX in openrc service file failed"
