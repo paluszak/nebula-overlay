@@ -34,10 +34,11 @@ src_configure() {
 
 src_compile() {
     if use nebula-cert; then
-        make bin
+        TOMAKE="bin"
     else
-        make bin-nebula
+        TOMAKE="bin-nebula"
     fi
+    make ${MAKEOPTS} ${TOMAKE}
 }
 
 src_install() {
